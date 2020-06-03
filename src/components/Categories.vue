@@ -5,7 +5,21 @@
 </template>
 
 <script>
-export default {};
+import { mapGetters, mapActions } from 'vuex';
+import { getCategories } from '../api/open-trivia';
+
+export default {
+  name: 'Categories',
+  created() {
+    this.fetchCategories;
+  },
+  methods: {
+    ...mapActions(['fetchCategories']),
+  },
+  computed: {
+    ...mapGetters(['allCategories']),
+  },
+};
 </script>
 
 <style scoped></style>
