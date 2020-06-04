@@ -1,7 +1,9 @@
 <template>
   <div>
     <h2>Welcome to the Game</h2>
-    <button>select categories</button>
+    <button>
+      <router-link to="/categories"> select categories</router-link>
+    </button>
     to get started
   </div>
 </template>

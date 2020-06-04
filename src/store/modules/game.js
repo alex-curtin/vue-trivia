@@ -13,15 +13,22 @@ const getters = {
 
 const actions = {
   async fetchCategories({ commit }) {
-    const categories = getCategories();
+    const categories = await getCategories();
     console.log(categories);
     commit('setCategories', categories);
+  },
+  selectCategories({ commit }, categories) {
+    console.log(categories);
+    commit('setSelectedCategories', categories);
   },
 };
 
 const mutations = {
-  setCategories(state, categories) {
+  setCategories: (state, categories) => {
     state.categories = categories;
+  },
+  setSelectedCategories: (state, categories) => {
+    state.selectedCategories = categories;
   },
 };
 
