@@ -1,25 +1,37 @@
-import { getCategories } from '../../api/open-trivia';
+import { router } from '../../main';
+import { getCategories, getQuestion } from '../../api/open-trivia';
 
 const state = {
   categories: [],
   selectedCategories: [],
   score: 0,
   numQuestions: 0,
+  correctAnswers: 0,
+  question: null,
 };
 
 const getters = {
   allCategories: (state) => state.categories,
+  question: (state) => state.question,
 };
 
 const actions = {
   async fetchCategories({ commit }) {
     const categories = await getCategories();
-    console.log(categories);
     commit('setCategories', categories);
   },
   selectCategories({ commit }, categories) {
-    console.log(categories);
     commit('setSelectedCategories', categories);
+    router.push('/game');
+  },
+  async fetchQuestion({ commit }) {
+    const category =
+      state.selectedCategories[
+        Math.floor(Math.random() * state.selectedCategories.length)
+      ];
+    const question = await getQuestion(category);
+    console.log(question);
+    commit('setQuestion', question);
   },
 };
 
@@ -29,6 +41,9 @@ const mutations = {
   },
   setSelectedCategories: (state, categories) => {
     state.selectedCategories = categories;
+  },
+  setQuestion: (state, question) => {
+    state.question = question;
   },
 };
 

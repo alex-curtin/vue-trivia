@@ -9,5 +9,5 @@ export const getQuestion = async (category) => {
   const res = await axios.get(
     `https://opentdb.com/api.php?amount=1&category=${category}`
   );
-  return res.data;
+  return res.data.results[0];
 };

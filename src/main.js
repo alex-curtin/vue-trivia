@@ -4,6 +4,7 @@ import store from './store';
 import App from './App.vue';
 import Home from './components/Home';
 import Categories from './components/Categories';
+import MainGame from './components/MainGame';
 
 Vue.use(VueRouter);
 
@@ -12,6 +13,7 @@ export const router = new VueRouter({
   routes: [
     { path: '/', component: Home },
     { path: '/categories', component: Categories },
+    { path: '/game', component: MainGame },
   ],
 });
 
