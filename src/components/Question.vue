@@ -1,6 +1,6 @@
 <template>
   <div>
-    {{ question.question }}
+    {{ question }}
   </div>
 </template>
 
