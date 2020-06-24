@@ -4,19 +4,19 @@
 
 <script>
 export default {
-  name: "Loading"
+  name: 'Loading',
 };
 </script>
 
 <style scoped>
 .loading {
   margin: 5rem auto;
-  border: 16px solid var(--lightGrey);
-  border-top: 16px solid var(--primary);
+  border: 24px solid var(--lightGrey);
+  border-top: 24px solid var(--primary);
   border-radius: 50%;
   width: 100px;
   height: 100px;
-  animation: spin 0.8s linear infinite;
+  animation: spin 0.6s linear infinite;
 }
 @keyframes spin {
   0% {

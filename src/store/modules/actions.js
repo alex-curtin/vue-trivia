@@ -27,4 +27,8 @@ export default {
   addToScore({ commit }) {
     commit('addToScore');
   },
+  restart({ commit }) {
+    commit('resetScore');
+    commit('resetQuestions');
+  },
 };

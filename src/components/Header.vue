@@ -9,19 +9,19 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState } from 'vuex';
 
 export default {
-  name: "Header",
+  name: 'Header',
   computed: {
-    ...mapState(["score", "numQuestions"])
-  }
+    ...mapState(['score', 'numQuestions']),
+  },
 };
 </script>
 
 <style scoped>
 header {
-  background: var(--grey);
+  background: var(--primary);
   color: var(--white);
   display: flex;
   justify-content: space-between;

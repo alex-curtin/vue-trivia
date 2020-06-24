@@ -9,69 +9,77 @@
         :selectedAnswer="selectedAnswer"
         :correctAnswer="question.correct_answer"
       />
-      <button class="btn primary" v-if="isAnswered" @click="advanceQuestion">Next Question</button>
-      <h3 v-if="isAnswered">{{getMessage(result)}}</h3>
+      <button class="btn primary" v-if="isAnswered" @click="advanceQuestion">
+        Next Question
+      </button>
+      <h3 v-if="isAnswered">{{ getMessage(result) }}</h3>
     </div>
     <Loading v-else />
   </div>
 </template>
 
 <script>
-import { mapGetters, mapActions, mapState } from "vuex";
-import _ from "lodash";
-import Question from "../components/Question";
-import Choices from "../components/Choices";
-import Loading from "../components/Loading";
-import { getMessage } from "../helpers";
+import { mapGetters, mapActions, mapState } from 'vuex';
+import _ from 'lodash';
+import router from '../router';
+import Question from '../components/Question';
+import Choices from '../components/Choices';
+import Loading from '../components/Loading';
+import { getMessage } from '../helpers';
 
 export default {
-  name: "MainGame",
+  name: 'MainGame',
   components: {
     Question,
     Choices,
-    Loading
+    Loading,
   },
   created() {
     this.fetchQuestion();
   },
   data() {
     return {
-      result: "",
+      result: '',
       isAnswered: false,
-      selectedAnswer: null
+      selectedAnswer: null,
     };
   },
   methods: {
-    ...mapActions(["fetchQuestion", "addToScore"]),
+    ...mapActions(['fetchQuestion', 'addToScore']),
     handleSubmitAnswer(answer) {
       console.log(answer);
       if (answer === this.question.correct_answer) {
         this.addToScore();
-        this.result = "correct";
+        this.result = 'correct';
       } else {
-        this.result = "wrong";
+        this.result = 'wrong';
       }
       this.isAnswered = true;
       this.selectedAnswer = answer;
     },
     advanceQuestion() {
+      if (this.numQuestions === 5) {
+        return this.endGame();
+      }
       this.fetchQuestion();
-      this.result = "";
+      this.result = '';
       this.isAnswered = false;
       this.selectedAnswer = null;
     },
-    getMessage
+    endGame() {
+      router.push('/game-over');
+    },
+    getMessage,
   },
   computed: {
-    ...mapGetters(["question"]),
-    ...mapState(["numQuestions"]),
+    ...mapGetters(['question']),
+    ...mapState(['numQuestions']),
     choices() {
       const { correct_answer, incorrect_answers } = this.question;
       return _.shuffle([correct_answer, ...incorrect_answers]);
-    }
-  }
+    },
+  },
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

@@ -17,4 +17,10 @@ export default {
   addToQuestionCount: (state) => {
     state.numQuestions++;
   },
+  resetScore: (state) => {
+    state.score = 0;
+  },
+  resetQuestions: (state) => {
+    state.numQuestions = 0;
+  },
 };

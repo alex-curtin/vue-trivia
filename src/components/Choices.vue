@@ -13,31 +13,31 @@
 
 <script>
 export default {
-  name: "Choices",
+  name: 'Choices',
   props: {
     choices: Array,
     correctAnswer: String,
     isAnswered: Boolean,
-    selectedAnswer: String
+    selectedAnswer: String,
   },
   methods: {
     onSelect(choice) {
-      this.$emit("submitAnswer", choice);
+      this.$emit('submitAnswer', choice);
     },
     getClass(choice) {
       if (this.isAnswered && choice === this.correctAnswer) {
-        return "btn green";
+        return 'btn green';
       } else if (
         this.isAnswered &&
         choice === this.selectedAnswer &&
         choice !== this.correctAnswer
       ) {
-        return "btn red";
+        return 'btn red';
       } else {
-        return "btn outline-grey";
+        return 'btn outline-grey';
       }
-    }
-  }
+    },
+  },
 };
 </script>
 

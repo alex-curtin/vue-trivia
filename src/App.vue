@@ -6,18 +6,18 @@
 </template>
 
 <script>
-import Header from "./components/Header";
+import Header from './components/Header';
 
 export default {
-  name: "App",
+  name: 'App',
   components: {
-    Header
-  }
+    Header,
+  },
 };
 </script>
 
 <style>
-@import url("https://fonts.googleapis.com/css2?family=MuseoModerno&family=Open+Sans&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=MuseoModerno&family=Open+Sans&display=swap');
 
 :root {
   --primary: #2655ee;
@@ -30,11 +30,11 @@ export default {
 * {
   margin: 0;
   box-sizing: border-box;
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Open Sans', sans-serif;
 }
 
 h1 {
-  font-family: "MuseoModerno", sans-serif;
+  font-family: 'MuseoModerno', sans-serif;
 }
 h2 {
   margin: 2rem 0;
@@ -92,6 +92,7 @@ h3 {
 }
 .btn.green:hover:enabled {
   color: var(--green);
+  border-color: var(--green);
   background: var(--white);
 }
 .btn.red {
