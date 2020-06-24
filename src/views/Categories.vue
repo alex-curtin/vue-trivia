@@ -1,66 +1,66 @@
 <template>
   <div class="page">
     <h2>Select Categories</h2>
-    <div class="ui grid center">
+    <div class="btn-container">
       <button
+        :class="checkSelected(category.id)"
         v-for="category in allCategories"
         :key="category.id"
         @click="selectCategory(category.id)"
-        class="ui button four wide column center"
-        :class="checkSelected(category.id)"
-      >
-        {{ category.name }}
-      </button>
+        :pressed="checkSelected(category.id)"
+      >{{ category.name }}</button>
     </div>
     <button
+      class="btn green"
       v-if="selectedCategories.length > 2"
-      class="ui button"
       @click="selectCategories(selectedCategories)"
-    >
-      start
-    </button>
+    >start</button>
   </div>
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex';
+import { mapGetters, mapActions } from "vuex";
 
 export default {
-  name: 'Categories',
+  name: "Categories",
+
   created() {
     this.fetchCategories();
+    console.log(this.categories);
   },
   data() {
     return { selectedCategories: [] };
   },
   methods: {
-    ...mapActions(['fetchCategories', 'selectCategories']),
+    ...mapActions(["fetchCategories", "selectCategories"]),
     selectCategory(id) {
+      console.log(this.allCategories);
+
       this.selectedCategories.includes(id)
         ? (this.selectedCategories = this.selectedCategories.filter(
-            (el) => el !== id
+            el => el !== id
           ))
         : this.selectedCategories.push(id);
     },
     checkSelected(id) {
-      return this.selectedCategories.includes(id) && 'selected';
-    },
+      return this.selectedCategories.includes(id)
+        ? "btn primary"
+        : "btn outline-primary";
+    }
   },
   computed: {
-    ...mapGetters(['allCategories']),
-  },
+    ...mapGetters(["allCategories"])
+  }
 };
 </script>
 
 <style scoped>
-.page {
-  text-align: center;
-}
-
-.center {
-  margin: 10px auto;
-}
-.selected {
-  background-color: lightblue;
+.btn-container {
+  max-width: 900px;
+  margin: 0 auto 1rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-column-gap: 1rem;
+  grid-row-gap: 1rem;
 }
 </style>

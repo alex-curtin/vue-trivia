@@ -1,55 +1,77 @@
 <template>
-  <div>
+  <div class="page">
     <div v-if="question">
-      <div v-if="answered">{{ result }}</div>
       <Question :question="question.question" />
-      <Choices :choices="choices" @submitAnswer="handleSubmitAnswer" />
-      <button v-if="answered">Next Question</button>
+      <Choices
+        @submitAnswer="handleSubmitAnswer"
+        :choices="choices"
+        :isAnswered="isAnswered"
+        :selectedAnswer="selectedAnswer"
+        :correctAnswer="question.correct_answer"
+      />
+      <button class="btn primary" v-if="isAnswered" @click="advanceQuestion">Next Question</button>
+      <h3 v-if="isAnswered">{{getMessage(result)}}</h3>
     </div>
+    <Loading v-else />
   </div>
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex';
-import shuffle from 'shuffle-array';
-import Question from '../components/Question';
-import Choices from '../components/Choices';
+import { mapGetters, mapActions, mapState } from "vuex";
+import _ from "lodash";
+import Question from "../components/Question";
+import Choices from "../components/Choices";
+import Loading from "../components/Loading";
+import { getMessage } from "../helpers";
 
 export default {
-  name: 'MainGame',
-  components: { Question, Choices },
+  name: "MainGame",
+  components: {
+    Question,
+    Choices,
+    Loading
+  },
   created() {
     this.fetchQuestion();
   },
   data() {
     return {
-      answered: false,
-      result: '',
+      result: "",
+      isAnswered: false,
+      selectedAnswer: null
     };
   },
   methods: {
-    ...mapActions(['fetchQuestion', 'addToScore']),
+    ...mapActions(["fetchQuestion", "addToScore"]),
     handleSubmitAnswer(answer) {
       console.log(answer);
       if (answer === this.question.correct_answer) {
         this.addToScore();
-        //display 'correct answer'
-        this.result = 'correct';
+        this.result = "correct";
       } else {
-        //display 'incorrect'
-        this.result = 'wrong';
-        //mark correct answer
+        this.result = "wrong";
       }
+      this.isAnswered = true;
+      this.selectedAnswer = answer;
     },
+    advanceQuestion() {
+      this.fetchQuestion();
+      this.result = "";
+      this.isAnswered = false;
+      this.selectedAnswer = null;
+    },
+    getMessage
   },
   computed: {
-    ...mapGetters(['question']),
+    ...mapGetters(["question"]),
+    ...mapState(["numQuestions"]),
     choices() {
       const { correct_answer, incorrect_answers } = this.question;
-      return shuffle([correct_answer, ...incorrect_answers]);
-    },
-  },
+      return _.shuffle([correct_answer, ...incorrect_answers]);
+    }
+  }
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+</style>

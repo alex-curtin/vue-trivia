@@ -5,4 +5,5 @@ export default {
   numQuestions: 0,
   correctAnswers: 0,
   question: null,
+  token: null,
 };
