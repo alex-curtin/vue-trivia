@@ -1,10 +1,18 @@
 <template>
-  <div class="loading"></div>
+  <div>
+    <h2>{{ getMessage('loading') }}</h2>
+    <div class="loading"></div>
+  </div>
 </template>
 
 <script>
+import { getMessage } from '../helpers';
+
 export default {
   name: 'Loading',
+  methods: {
+    getMessage,
+  },
 };
 </script>
 

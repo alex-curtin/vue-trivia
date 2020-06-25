@@ -58,7 +58,7 @@ export default {
       this.selectedAnswer = answer;
     },
     advanceQuestion() {
-      if (this.numQuestions === 5) {
+      if (this.numQuestions === 20) {
         return this.endGame();
       }
       this.fetchQuestion();

@@ -2,6 +2,12 @@
   <div class="page">
     <h2>Game Over</h2>
     <h3>You answered {{ percentCorrect }}% correctly!</h3>
+    <pie-chart
+      :data="[
+        ['correct', score],
+        ['incorrect', numQuestions - score],
+      ]"
+    ></pie-chart>
     <button @click="playAgain" class="btn green">play again</button>
   </div>
 </template>
@@ -22,10 +28,14 @@ export default {
   computed: {
     ...mapState(['score', 'numQuestions']),
     percentCorrect() {
-      return (this.score / this.numQuestions) * 100;
+      return Math.floor((this.score / this.numQuestions) * 100);
     },
   },
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.btn {
+  margin-top: 1rem;
+}
+</style>

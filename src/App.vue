@@ -20,12 +20,12 @@ export default {
 @import url('https://fonts.googleapis.com/css2?family=MuseoModerno&family=Open+Sans&display=swap');
 
 :root {
-  --primary: #2655ee;
+  --primary: #3d76e1;
   --white: #fff;
-  --grey: #555;
+  --grey: #535052;
   --lightGrey: #ccc;
-  --green: #238f23;
-  --red: #c70c0c;
+  --green: #44ba26;
+  --red: #ed461d;
 }
 * {
   margin: 0;

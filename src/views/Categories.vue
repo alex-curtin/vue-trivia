@@ -1,6 +1,6 @@
 <template>
   <div class="page">
-    <h2>Select Categories</h2>
+    <h2>Select Your Categories</h2>
     <div class="btn-container">
       <button
         :class="checkSelected(category.id)"
@@ -8,21 +8,25 @@
         :key="category.id"
         @click="selectCategory(category.id)"
         :pressed="checkSelected(category.id)"
-      >{{ category.name }}</button>
+      >
+        {{ category.name }}
+      </button>
     </div>
     <button
       class="btn green"
       v-if="selectedCategories.length > 2"
       @click="selectCategories(selectedCategories)"
-    >start</button>
+    >
+      start
+    </button>
   </div>
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
-  name: "Categories",
+  name: 'Categories',
 
   created() {
     this.fetchCategories();
@@ -32,25 +36,25 @@ export default {
     return { selectedCategories: [] };
   },
   methods: {
-    ...mapActions(["fetchCategories", "selectCategories"]),
+    ...mapActions(['fetchCategories', 'selectCategories']),
     selectCategory(id) {
       console.log(this.allCategories);
 
       this.selectedCategories.includes(id)
         ? (this.selectedCategories = this.selectedCategories.filter(
-            el => el !== id
+            (el) => el !== id
           ))
         : this.selectedCategories.push(id);
     },
     checkSelected(id) {
       return this.selectedCategories.includes(id)
-        ? "btn primary"
-        : "btn outline-primary";
-    }
+        ? 'btn primary'
+        : 'btn outline-primary';
+    },
   },
   computed: {
-    ...mapGetters(["allCategories"])
-  }
+    ...mapGetters(['allCategories']),
+  },
 };
 </script>
 
